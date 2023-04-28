@@ -1,9 +1,10 @@
 export default {
+  base: "/bouncing-ball/",
   build: {
     rollupOptions: {
       output: {
-        assetFileNames: "[name].[ext]",
-        chunkFileNames: "[name].js",
+        assetFileNames: "[name].[hash].[ext]",
+        chunkFileNames: "[name].[hash].js",
         entryFileNames: "[name].js",
       },
     },
