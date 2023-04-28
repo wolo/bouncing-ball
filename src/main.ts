@@ -50,7 +50,7 @@ async function init(): Promise<void> {
   const ballOne = document.createElement("div");
   const ballTwo = document.createElement("div");
 
-  // -- Set the `id` of `ball` to "ball" (used for `src/ball-style.css`)
+  // -- Set the `id` of `ball`(used for `src/ball-style.css`)
   ballOne.id = "ball-1";
   ballTwo.id = "ball-2";
 
