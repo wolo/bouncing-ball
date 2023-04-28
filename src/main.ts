@@ -26,12 +26,12 @@ async function init(): Promise<void> {
     visitorCode,
     featureKey,
     variableKey: variableKeys.ballOneParameters,
-  }).value;
+  }).value as AnimateOptionsType;
   const ballTwoOptions = client.getFeatureFlagVariable({
     visitorCode,
     featureKey,
     variableKey: variableKeys.ballTwoParameters,
-  }).value;
+  }).value as AnimateOptionsType;
   const ballOneColor = client.getFeatureFlagVariable({
     visitorCode,
     featureKey,
@@ -54,9 +54,14 @@ async function init(): Promise<void> {
   ballOne.id = "ball-1";
   ballTwo.id = "ball-2";
 
-  // -- Set color of the ball using the feature flag variable
+  // -- Set color and size of the ball using the feature flag variable
   ballOne.style.backgroundColor = ballOneColor as string;
+  ballOne.style.width = ballOneOptions.size + "px";
+  ballOne.style.height = ballOneOptions.size + "px";
+
   ballTwo.style.backgroundColor = ballTwoColor as string;
+  ballTwo.style.width = ballTwoOptions.size + "px";
+  ballTwo.style.height = ballTwoOptions.size + "px";
 
   // -- Append `ball` to `app`
   app.appendChild(ballOne);

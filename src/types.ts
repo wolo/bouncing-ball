@@ -3,4 +3,5 @@ export type AnimateOptionsType = {
   y: number;
   xSpeed: number;
   ySpeed: number;
+  size: number;
 };

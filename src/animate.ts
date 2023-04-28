@@ -5,7 +5,7 @@ export function animate(
   element: HTMLDivElement,
   options: AnimateOptionsType
 ): void {
-  let { x, y, xSpeed, ySpeed } = options;
+  let { x, y, xSpeed, ySpeed, size } = options;
 
   x += xSpeed;
   y += ySpeed;
@@ -24,5 +24,5 @@ export function animate(
   element.style.left = x + "px";
   element.style.top = y + "px";
 
-  requestAnimationFrame(() => animate(element, { x, y, xSpeed, ySpeed }));
+  requestAnimationFrame(() => animate(element, { x, y, xSpeed, ySpeed, size }));
 }
