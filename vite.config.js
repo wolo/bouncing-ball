@@ -3,8 +3,8 @@ export default {
     rollupOptions: {
       output: {
         assetFileNames: "[name].[ext]",
-        chunkFileNames: "[name].[hash].js",
-        entryFileNames: "[name].[hash].js",
+        chunkFileNames: "[name].js",
+        entryFileNames: "[name].js",
       },
     },
   },
