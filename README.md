@@ -1,5 +1,12 @@
 # Bouncing ball demo
 
+## Info
+
+- Deployed to github pages automatically on push to `master`
+- Github pages url: `https://slava-inyu.github.io/bouncing-ball/`
+- Main logic is inside `src/main.ts` and `src/ball-styles.css`
+- Ball's parameters and colors are set in `bouncing_ball_demo` feature flag variables (`sdk.kameleoon@gmail.com`)
+
 ## Development
 
 ### Locally
@@ -13,11 +20,3 @@
 
 - Push changes to `master`
 - Wait for the github action to be finished
-
-
-## Info
-
-- Deployed to github pages automatically on push to `master`
-- Github pages url: `https://slava-inyu.github.io/bouncing-ball/`
-- Main logic is inside `src/main.ts` and `ball-styles.css`
-- Ball's parameters and colors are set in `bouncing_ball_demo` feature flag variables (`sdk.kameleoon@gmail.com`)
