@@ -2,8 +2,6 @@ import { BallType, CreateBallOptionsType } from "./types";
 
 // -- Animate ball
 export function animate(ball: BallType, isRandomColor: boolean) {
-  console.log(ball);
-
   ball.x += ball.xSpeed;
   ball.y += ball.ySpeed;
 
