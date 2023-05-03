@@ -1,18 +1,7 @@
 import "./style.css";
-import "./ball-style.css";
-import { AnimateOptionsType } from "./types";
-import { animate } from "./animate";
-import { KameleoonClient, KameleoonUtils } from "@kameleoon/javascript-sdk";
-
-const siteCode = "dhqz9s1tb6";
-const featureKey = "bouncing_ball_demo";
-const visitorCode = KameleoonUtils.getVisitorCode("www.example.com");
-const variableKeys = {
-  ballOneColor: "ball_one_color",
-  ballTwoColor: "ball_two_color",
-  ballOneParameters: "ball_one_parameters",
-  ballTwoParameters: "ball_two_parameters",
-};
+import { KameleoonClient } from "@kameleoon/javascript-sdk";
+import { animate, createBall } from "./helpers";
+import { featureKey, siteCode, visitorCode } from "./constants";
 
 // -- Configure the SDK
 const client = new KameleoonClient(siteCode);
@@ -21,70 +10,48 @@ async function init(): Promise<void> {
   // -- Initialize the SDK
   await client.initialize();
 
-  // -- Get the feature flag variables for the `ball` element
-  const ballOneOptions = client.getFeatureFlagVariable({
+  // -- Feature variables:
+  // - Ball size (number)
+  const ballSize = client.getFeatureFlagVariable({
     visitorCode,
     featureKey,
-    variableKey: variableKeys.ballOneParameters,
-  }).value as AnimateOptionsType;
-  const ballTwoOptions = client.getFeatureFlagVariable({
+    variableKey: "ball_size",
+  }).value as number;
+  // - Ball color (string)
+  const ballColor = client.getFeatureFlagVariable({
     visitorCode,
     featureKey,
-    variableKey: variableKeys.ballTwoParameters,
-  }).value as AnimateOptionsType;
-  const ballOneColor = client.getFeatureFlagVariable({
+    variableKey: "ball_color",
+  }).value as string;
+  // - Ball speed (number)
+  const ballSpeed = client.getFeatureFlagVariable({
     visitorCode,
     featureKey,
-    variableKey: variableKeys.ballOneColor,
-  }).value;
-  const ballTwoColor = client.getFeatureFlagVariable({
+    variableKey: "ball_speed",
+  }).value as number;
+  // - Number of balls (number)
+  const ballsAmount = client.getFeatureFlagVariable({
     visitorCode,
     featureKey,
-    variableKey: variableKeys.ballTwoColor,
-  }).value;
+    variableKey: "balls_amount",
+  }).value as number;
+  // - Randomize on bounce (boolean) - whether the color of the ball should change on bounce
+  const randomizeOnBounce = client.getFeatureFlagVariable({
+    visitorCode,
+    featureKey,
+    variableKey: "randomize_on_bounce",
+  }).value as boolean;
 
-  // -- Create a root `app` element in the DOM
-  const app = document.getElementById("app")!;
+  // -- Main code --
+  for (let i = 0; i < ballsAmount; i++) {
+    const ball = createBall({
+      color: ballColor,
+      speed: ballSpeed,
+      size: ballSize,
+    });
 
-  // -- Create a `ball` element in the DOM
-  const ballOne = document.createElement("div");
-  const ballTwo = document.createElement("div");
-
-  // -- Set the `id` of `ball`(used for `src/ball-style.css`)
-  ballOne.id = "ball-1";
-  ballTwo.id = "ball-2";
-
-  // -- Set color and size of the ball using the feature flag variable
-  ballOne.style.backgroundColor = ballOneColor as string;
-  ballOne.style.width = ballOneOptions.size + "px";
-  ballOne.style.height = ballOneOptions.size + "px";
-
-  ballTwo.style.backgroundColor = ballTwoColor as string;
-  ballTwo.style.width = ballTwoOptions.size + "px";
-  ballTwo.style.height = ballTwoOptions.size + "px";
-
-  // -- Append `ball` to `app`
-  app.appendChild(ballOne);
-  app.appendChild(ballTwo);
-
-  // -- Give `ball` a starting position and speed
-  // (can be done manually, but for now we use the feature flag variables)
-  // const ballOneOptions: AnimateOptionsType = {
-  //   x: 0,
-  //   y: 0,
-  //   xSpeed: 5,
-  //   ySpeed: 5,
-  // };
-  // const ballTwoOptions: AnimateOptionsType = {
-  //   x: 0,
-  //   y: 0,
-  //   xSpeed: 10,
-  //   ySpeed: 10,
-  // };
-
-  // -- Animate `ball`
-  animate(ballOne, ballOneOptions as AnimateOptionsType);
-  animate(ballTwo, ballTwoOptions as AnimateOptionsType);
+    animate(ball, randomizeOnBounce);
+  }
 }
 
 init();
