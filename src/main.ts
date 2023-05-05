@@ -41,6 +41,15 @@ async function init(): Promise<void> {
     featureKey,
     variableKey: "randomize_on_bounce",
   }).value as boolean;
+  // - Screen title (string)
+  const screenTitle = client.getFeatureFlagVariable({
+    visitorCode,
+    featureKey,
+    variableKey: "title_text",
+  }).value as string;
+
+  const titleElement = document.querySelector("#title > p")!;
+  titleElement.textContent = screenTitle;
 
   // -- Main code --
   for (let i = 0; i < ballsAmount; i++) {
