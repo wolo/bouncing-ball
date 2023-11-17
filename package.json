@@ -1,6 +1,6 @@
 {
   "name": "bouncing-ball",
-  "homepage": "https://github.com/Slava-Inyu/bouncing-ball",
+  "homepage": "https://github.com/Kameleoon/bouncing-ball",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -14,6 +14,6 @@
     "vite": "^4.3.2"
   },
   "dependencies": {
-    "@kameleoon/javascript-sdk": "^1.3.2"
+    "@kameleoon/javascript-sdk": "^2.0.0"
   }
 }

@@ -4,11 +4,16 @@ import { animate, createBall } from "./helpers";
 import { featureKey, siteCode, visitorCode } from "./constants";
 
 // -- Configure the SDK
-const client = new KameleoonClient(siteCode);
+const client = new KameleoonClient({ siteCode });
 
 async function init(): Promise<void> {
   // -- Initialize the SDK
   await client.initialize();
+
+  // -- Reload the page when the configuration is updated
+  client.onConfigurationUpdate(() => {
+    window.location.reload();
+  });
 
   // -- Feature variables:
   // - Ball size (number)
